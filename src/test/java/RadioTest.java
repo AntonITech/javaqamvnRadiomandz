@@ -8,9 +8,9 @@ public class RadioTest {
     public void shouldSetRadioStationNumb() {
         Radio radstation = new Radio();
 
-        radstation.setCurrentRadioStationNumb(8);
+        radstation.setCurrentRadioStationNumb(10);
 
-        int expected = 8;
+        int expected = 0;
         int actual = radstation.getCurrentRadioStationNumb();
 
         Assertions.assertEquals(expected, actual);
@@ -21,6 +21,34 @@ public class RadioTest {
         Radio radstation = new Radio();
 
         radstation.setToMaxNumbStation();
+
+        int expected = 9;
+        int actual = radstation.getCurrentRadioStationNumb();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetCurrentRadioStationNumbUnderLimitMin() {
+        Radio radstation = new Radio();
+
+        radstation.setCurrentRadioStationNumbUnderLimit(-1);
+
+        radstation.setCurrentRadioStationNumbMinMax();
+
+        int expected = 0;
+        int actual = radstation.getCurrentRadioStationNumb();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetCurrentRadioStationNumbUnderLimitMax() {
+        Radio radstation = new Radio();
+
+        radstation.setCurrentRadioStationNumbUnderLimit(10);
+
+        radstation.setCurrentRadioStationNumbMinMax();
 
         int expected = 9;
         int actual = radstation.getCurrentRadioStationNumb();
@@ -190,6 +218,21 @@ public class RadioTest {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(9);
+
+
+        radio.increaseVolumeOnOne();
+
+        int expected = 10;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldIncreaseVolumeOnOneBack() {
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(10);
 
 
         radio.increaseVolumeOnOne();

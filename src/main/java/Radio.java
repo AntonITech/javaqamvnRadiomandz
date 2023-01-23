@@ -18,6 +18,10 @@ public class Radio {
         if (newCurrentRadioStationNumb > 9) {
             newCurrentRadioStationNumb = 0;
         }
+        currentRadioStationNumb = newCurrentRadioStationNumb;
+    }
+
+    public void setCurrentRadioStationNumbUnderLimit(int newCurrentRadioStationNumb) {
         if (newCurrentRadioStationNumb < 0) {
             newCurrentRadioStationNumb = newCurrentRadioStationNumb + 1;
         }
@@ -28,13 +32,6 @@ public class Radio {
     }
 
     public void setCurrentRadioStationNumbMinMax() {
-
-        if (currentRadioStationNumb < 0) {
-            //currentRadioStationNumb = 9;
-        }
-        if (currentRadioStationNumb > 9) {
-            currentRadioStationNumb = 0;
-        }
         currentRadioStationNumb = currentRadioStationNumb;
     }
 
