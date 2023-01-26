@@ -1,17 +1,22 @@
 public class Radio {
 
-    // РАДИОВОЛНЫ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public int currentRadioStationNumb;  //Номер текущей радиостанции
+    private int currentRadioStationNumb;  //Номер текущей радиостанции
+
+    private int currentVolume;            //уровень звука
 
     public int getCurrentRadioStationNumb() {
         return currentRadioStationNumb;
+    }
+
+    public void setCurrentRadioStationNumb() {
+        currentRadioStationNumb = currentRadioStationNumb;
     }
 
     public void setToMaxNumbStation() {
         currentRadioStationNumb = 9;
     }
 
-    public void setCurrentRadioStationNumb(int newCurrentRadioStationNumb) {
+    public void setCurrentRadioStationRangeLimit(int newCurrentRadioStationNumb) {
         if (newCurrentRadioStationNumb < 0) {
             newCurrentRadioStationNumb = 9;
         }
@@ -21,29 +26,34 @@ public class Radio {
         currentRadioStationNumb = newCurrentRadioStationNumb;
     }
 
-    public void setCurrentRadioStationNumbUnderLimit(int newCurrentRadioStationNumb) {
-        if (newCurrentRadioStationNumb < 0) {
-            newCurrentRadioStationNumb = newCurrentRadioStationNumb + 1;
+    public void shouldCurrentRadioStationPrev(int newCurrentRadioStationNumbPrev) {
+        if (newCurrentRadioStationNumbPrev < 0) {
+            newCurrentRadioStationNumbPrev = newCurrentRadioStationNumbPrev + 1;
         }
-        if (newCurrentRadioStationNumb > 9) {
-            newCurrentRadioStationNumb = newCurrentRadioStationNumb - 1;
+        if (newCurrentRadioStationNumbPrev < 0) {
+            newCurrentRadioStationNumbPrev = 9;
         }
-        currentRadioStationNumb = newCurrentRadioStationNumb;
+        currentRadioStationNumb = newCurrentRadioStationNumbPrev;
     }
 
-    public void setCurrentRadioStationNumbMinMax() {
-        currentRadioStationNumb = currentRadioStationNumb;
+    public void shouldCurrentRadioStationNext(int newCurrentRadioStationNumbNext) {
+        if (newCurrentRadioStationNumbNext > 9) {
+            newCurrentRadioStationNumbNext = newCurrentRadioStationNumbNext - 1;
+        }
+        if (newCurrentRadioStationNumbNext > 9) {
+            newCurrentRadioStationNumbNext = 0;
+        }
+        currentRadioStationNumb = newCurrentRadioStationNumbNext;
     }
 
     // Громкость звука!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public int currentVolume;
-
-    public void setMaxVolume() {
-        currentVolume = 10;
-    }
 
     public int getCurrentVolume() {
         return currentVolume;
+    }
+
+    public void setMaxVolume() {
+        currentVolume = 10;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
