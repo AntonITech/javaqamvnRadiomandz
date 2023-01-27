@@ -16,6 +16,10 @@ public class Radio {
         currentRadioStationNumb = 9;
     }
 
+    public void setToMinNumbStation() {
+        currentRadioStationNumb = 0;
+    }
+
     public void setCurrentRadioStationRangeLimit(int newCurrentRadioStationNumb) {
         if (newCurrentRadioStationNumb < 0) {
             newCurrentRadioStationNumb = 9;
@@ -26,25 +30,17 @@ public class Radio {
         currentRadioStationNumb = newCurrentRadioStationNumb;
     }
 
-    public void shouldCurrentRadioStationPrev(int newCurrentRadioStationNumbPrev) {
-        if (newCurrentRadioStationNumbPrev < 0) {
-            newCurrentRadioStationNumbPrev = newCurrentRadioStationNumbPrev + 1;
-        }
-        if (newCurrentRadioStationNumbPrev < 0) {
-            newCurrentRadioStationNumbPrev = 9;
-        }
-        currentRadioStationNumb = newCurrentRadioStationNumbPrev;
+    public void nextRadioStation() {     //new version
+        int target = currentRadioStationNumb + 1;
+        setCurrentRadioStationRangeLimit(target);
     }
 
-    public void shouldCurrentRadioStationNext(int newCurrentRadioStationNumbNext) {
-        if (newCurrentRadioStationNumbNext > 9) {
-            newCurrentRadioStationNumbNext = newCurrentRadioStationNumbNext - 1;
-        }
-        if (newCurrentRadioStationNumbNext > 9) {
-            newCurrentRadioStationNumbNext = 0;
-        }
-        currentRadioStationNumb = newCurrentRadioStationNumbNext;
+    public void prevRadioStation() {     //new version
+        int target = currentRadioStationNumb - 1;
+        setCurrentRadioStationRangeLimit(target);
     }
+
+
 
     // Громкость звука!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

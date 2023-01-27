@@ -17,10 +17,10 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetRadioStationNumbOutsideMaxLimit() {
+    public void shouldSetToMinNumbStation() {
         Radio radstation = new Radio();
 
-        radstation.setCurrentRadioStationRangeLimit(10);
+        radstation.setToMinNumbStation();
 
         int expected = 0;
         int actual = radstation.getCurrentRadioStationNumb();
@@ -29,38 +29,10 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldRadioStationNumbOutsideMinLimit() {
+    public void shouldRadioStationNumbAboveMax() {
         Radio radstation = new Radio();
 
-        radstation.setCurrentRadioStationRangeLimit(-2);
-
-        int expected = 9;
-        int actual = radstation.getCurrentRadioStationNumb();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetCurrentRadioStationNumbPrev() {
-        Radio radstation = new Radio();
-
-        radstation.shouldCurrentRadioStationPrev(-2);
-
-        radstation.setCurrentRadioStationNumb();
-
-        int expected = 9;
-        int actual = radstation.getCurrentRadioStationNumb();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetCurrentRadioStationNextNumb() {
-        Radio radstation = new Radio();
-
-        radstation.shouldCurrentRadioStationNext(12);
-
-        radstation.setCurrentRadioStationNumb();
+        radstation.setCurrentRadioStationRangeLimit(11);
 
         int expected = 0;
         int actual = radstation.getCurrentRadioStationNumb();
@@ -69,12 +41,10 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetCurrentRadioStationNumbBelowMin() {
+    public void shouldRadioStationNumbBelowMin() {
         Radio radstation = new Radio();
 
-        radstation.shouldCurrentRadioStationPrev(-2);
-
-        radstation.setCurrentRadioStationNumb();
+        radstation.setCurrentRadioStationRangeLimit(-1);
 
         int expected = 9;
         int actual = radstation.getCurrentRadioStationNumb();
@@ -83,12 +53,36 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetCurrentRadioStationNumbIsMin() {
+    public void shouldRadioStationNumbEqualMax() {
+        Radio radstation = new Radio();
+
+        radstation.setCurrentRadioStationRangeLimit(9);
+
+        int expected = 9;
+        int actual = radstation.getCurrentRadioStationNumb();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldRadioStationNumbEqualMin() {
         Radio radstation = new Radio();
 
         radstation.setCurrentRadioStationRangeLimit(0);
 
-        radstation.setCurrentRadioStationNumb();
+        int expected = 0;
+        int actual = radstation.getCurrentRadioStationNumb();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextRadioStationNumb() {
+        Radio radstation = new Radio();
+
+        radstation.setCurrentRadioStationRangeLimit(9);
+
+        radstation.nextRadioStation();
 
         int expected = 0;
         int actual = radstation.getCurrentRadioStationNumb();
@@ -97,7 +91,21 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetCurrentRadioStationNumbValidMin() {
+    public void shouldPrevRadioStationNumb() {
+        Radio radstation = new Radio();
+
+        radstation.setCurrentRadioStationRangeLimit(0);
+
+        radstation.prevRadioStation();
+
+        int expected = 9;
+        int actual = radstation.getCurrentRadioStationNumb();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldRadioStationNumbValidMin() {
         Radio radstation = new Radio();
 
         radstation.setCurrentRadioStationRangeLimit(1);
@@ -105,48 +113,6 @@ public class RadioTest {
         radstation.setCurrentRadioStationNumb();
 
         int expected = 1;
-        int actual = radstation.getCurrentRadioStationNumb();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetCurrentRadioStationNumbAboveMax() {
-        Radio radstation = new Radio();
-
-        radstation.setCurrentRadioStationRangeLimit(10);
-
-        radstation.setCurrentRadioStationNumb();
-
-        int expected = 0;
-        int actual = radstation.getCurrentRadioStationNumb();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetCurrentRadioStationNumbIsMax() {
-        Radio radstation = new Radio();
-
-        radstation.setCurrentRadioStationRangeLimit(9);
-
-        radstation.setCurrentRadioStationNumb();
-
-        int expected = 9;
-        int actual = radstation.getCurrentRadioStationNumb();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetCurrentRadioStationValidNumb() {
-        Radio radstation = new Radio();
-
-        radstation.setCurrentRadioStationRangeLimit(8);
-
-        radstation.setCurrentRadioStationNumb();
-
-        int expected = 8;
         int actual = radstation.getCurrentRadioStationNumb();
 
         Assertions.assertEquals(expected, actual);
@@ -190,7 +156,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetVolumeIsMax() {
+    public void shouldSetVolumeEqualMax() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(10);
@@ -214,7 +180,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetVolumeIsMin() {
+    public void shouldSetVolumeEqualMin() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(0);
@@ -242,7 +208,6 @@ public class RadioTest {
     @Test
     public void shouldIncreaseVolumeOnOne() {
         Radio radio = new Radio();
-
         radio.setCurrentVolume(8);
 
         radio.increaseVolumeOnOne();
@@ -268,7 +233,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldDecreaseVolumeOnOneValidValue() {
+    public void shouldDecreaseVolumeValidValue() {
         Radio radio = new Radio();
 
         radio.setCurrentVolume(3);
